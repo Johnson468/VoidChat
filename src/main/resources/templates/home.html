@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Void Chat Home</title>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="../javascript/home-validation.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+
+</head>
+<body>
+
+
+<div class="col-md-4">
+	
+	<div  class = "text-center">	
+		<div th:if ="${sentback} == true" class="alert alert-primary" role="alert">
+  			The ID you entered is either incorrect, or the chatroom no longer is active. 
+		</div>	
+		<div th:if ="${isFull} == true" class="alert alert-primary" role="alert">
+  			The chatroom you're trying is full.
+		</div>
+	
+  <div class="input-group">
+  <form action="#" th:action="@{/byId}" th:object="${chatroom}" name ="chatroomform">
+  <label for="*{roomId}">Join by room ID</label>
+      <input type="text" class="form-control" th:field="*{roomId}" placeholder="" name ="roomId">
+      
+      <span class="input-group-btn">
+        <button type="submit" value="Submit" class="center-block btn btn-large btn-primary">Search</button>
+      </span>
+      </form>
+    </div><!-- /input-group -->
+    <form action="#" th:action="@{/create}">
+  <button type="submit" value="Submit" class="center-block btn btn-large btn-primary">Create a new room</button>
+  </form>
+</div>
+
+</div>
+</body>
+
+</html>

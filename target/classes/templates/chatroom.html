@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<div class="container">
+    <div class="row">
+        <div class="panel panel-default">
+          <div class="panel-heading"><p th:text ="'Chatroom ID:'+ ${chatroom.roomId}"/></div>
+          <div class="panel-body">
+            <div class="container">
+              
+            </div>
+            <div class="panel-footer">
+                 <div class="input-group">
+                 <form th:action="@{/sendmessage}" th:object="${message}" >
+                  <input type="text" class="form-control" th:field="*{contents}">
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Send</button>
+                  </span>
+                  </form>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+<div>
+	<form type ="hidden" action="/leave">
+		<button type ="submit" value="leave" class="btn btn-secondary">Leave
+		</button> 
+	</form>
+	
+
+</div>
+
+</html>
