@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import Models.Chatroom;
 import Models.Message;
 import Utilities.ChatroomManager;
+import Utilities.MessageManager;
 
 @Controller
 public class ChatroomController {
 ChatroomManager crm = new ChatroomManager();
+MessageManager mm = new MessageManager();
    //Need to add a function to increment the number of people in the room when someone joins, and the inverse when someone leaves.
     @RequestMapping("/byId")
     public String Chat(@RequestParam(name="roomId", required=true, defaultValue="-1")int roomId, Model model, HttpSession session) {
@@ -28,15 +30,16 @@ ChatroomManager crm = new ChatroomManager();
     		return "home";
     		//If the chatroom is full
     	} else if (chatroom.getMaxMembers() == chatroom.getCurrentMembers()) {
-    		model.addAttribute("chatroom",new Chatroom());
+    		/*model.addAttribute("chatroom",new Chatroom());
     		model.addAttribute("isFull",true);
-    		return "home";
+    		return "home";*/
     	}
     	//If the chatroom exists and isn't full
     	crm.addMember(chatroom.getRoomId());
         model.addAttribute("chatroom", chatroom);
         session.setAttribute("chatroom", chatroom);
         model.addAttribute("message",new Message());
+        model.addAttribute("messages",mm.getMessages(chatroom.getRoomId()));
         return "chatroom";
     }
     @RequestMapping("/create")
@@ -67,6 +70,7 @@ ChatroomManager crm = new ChatroomManager();
     	Chatroom myRoom = (Chatroom) session.getAttribute("chatroom");
     	crm.sendMessage(myRoom.getRoomId(),message.getContents());
     	model.addAttribute("chatroom",myRoom);
+    	model.addAttribute("messages",mm.getMessages(myRoom.getRoomId()));
     	return "chatroom";
     }
 }
