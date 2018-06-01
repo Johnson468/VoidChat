@@ -3,16 +3,22 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Create a new chatroom</title>
+<link rel="stylesheet" href="../css/styles.css"/>
+<script src="https://cdn.jsdelivr.net/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+<script src="../javascript/create-validation.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
 </head>
 <body>
 <center>
 <span>
- <form action="#" th:action="@{/createRoom}" th:object="${chatroom}" method="post">
+ <form action="#" th:action="@{/createRoom}" th:object="${chatroom}" method="post" name ="createform">
     	<p>Max Size<input type="number" th:field="*{maxMembers}" value ="Max Size: "/></p>
-        <p><button type="submit" value="Submit">Create Room</button> <button type="reset" value="Reset" >Reset</button></p>
+        <p><button type="submit" class = "btn btn-primary" value="Submit">Create Room</button> <button class= "btn btn-secondary" type="reset" value="Reset" >Reset</button></p>
     </form>
     <form action="#" th:action="@{/}" method = "post">
     	<button type="submit">Go back</button>

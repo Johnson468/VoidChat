@@ -15,7 +15,7 @@ $(function() {
     },
     // Specify validation error messages
     messages: {
-      roomId: "Please enter a room Id"
+      roomId: "Please enter a valid number of members"
     },
     // Make sure the form is submitted to the destination defined
     // in the "action" attribute of the form when valid

@@ -1,10 +1,11 @@
 <html>
 <head>
 <title>Void Chat Home</title>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="../css/styles.css"/>
+<script src="https://cdn.jsdelivr.net/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="../javascript/home-validation.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
 
@@ -32,9 +33,11 @@
       </span>
       </form>
     </div><!-- /input-group -->
+    <span class="input-group-btn">
     <form action="#" th:action="@{/create}">
   <button type="submit" value="Submit" class="center-block btn btn-large btn-primary">Create a new room</button>
   </form>
+  <span class="input-group-btn">
 </div>
 
 </div>
