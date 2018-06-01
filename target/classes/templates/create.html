@@ -9,10 +9,15 @@
 </head>
 <body>
 <center>
+<span>
  <form action="#" th:action="@{/createRoom}" th:object="${chatroom}" method="post">
     	<p>Max Size<input type="number" th:field="*{maxMembers}" value ="Max Size: "/></p>
-        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+        <p><button type="submit" value="Submit">Create Room</button> <button type="reset" value="Reset" >Reset</button></p>
     </form>
+    <form action="#" th:action="@{/}" method = "post">
+    	<button type="submit">Go back</button>
+    </form>
+   </span>
 </center>
 
 </body>
