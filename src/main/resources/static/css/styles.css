@@ -26,7 +26,8 @@ form input {
   border: 0;
   margin-bottom: 3px;
   display: block;
-  width: 100%;
+  width: 50%;
+  align: center
 }
 form input {
   height: 25px;
