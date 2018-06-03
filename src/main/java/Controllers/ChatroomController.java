@@ -30,9 +30,9 @@ MessageManager mm = new MessageManager();
     		return "home";
     		//If the chatroom is full
     	} else if (chatroom.getMaxMembers() == chatroom.getCurrentMembers()) {
-    		/*model.addAttribute("chatroom",new Chatroom());
+    		model.addAttribute("chatroom",new Chatroom());
     		model.addAttribute("isFull",true);
-    		return "home";*/
+    		return "home";
     	}
     	//If the chatroom exists and isn't full
     	crm.addMember(chatroom.getRoomId());
