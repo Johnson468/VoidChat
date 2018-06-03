@@ -21,7 +21,8 @@
               	<div class="row message-bubble">
               	
               	<ul th:each="message: ${messages}">
-              		<li th:text="${message}"><p th:text="${message}"></p></li>
+              		<li th:text="${message.contents}"><p th:text="${message.contents}"></p></li>
+              		<li th:text = "${message.sender}"><<p th:text="${message.sender}"></p></li>
               	</ul>
                 
                 

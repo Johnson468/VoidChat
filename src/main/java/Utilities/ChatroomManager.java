@@ -269,13 +269,13 @@ public class ChatroomManager {
 	 * @param id- The chatroom ID
 	 * @param message- The String message (To be replaced with an encryption algorithm later)
 	 */
-	public void sendMessage(int id, String message) {
+	public void sendMessage(int id, String message, String sender) {
 		Statement stmt = null;
 		Connection conn = ConnectionManager.makeConnection();
 		try {
 		    stmt = conn.createStatement();
 		    //Execute query
-		    stmt.executeUpdate("INSERT INTO messages VALUES("+ id +   ",\""  + message + "\");");
+		    stmt.executeUpdate("INSERT INTO messages VALUES("+ id +   ",\""  + message + "\", \"" + sender + "\");");
 		}
 		catch (SQLException ex){
 		    // handle any errors

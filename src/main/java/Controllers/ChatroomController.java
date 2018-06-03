@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import Models.Chatroom;
 import Models.Message;
+import Models.User;
 import Utilities.ChatroomManager;
 import Utilities.MessageManager;
 
@@ -36,9 +37,12 @@ MessageManager mm = new MessageManager();
     	}
     	//If the chatroom exists and isn't full
     	crm.addMember(chatroom.getRoomId());
+    	User user = new User();
         model.addAttribute("chatroom", chatroom);
         session.setAttribute("chatroom", chatroom);
         model.addAttribute("message",new Message());
+        session.setAttribute("user", user);
+        model.addAttribute("user", user);
         model.addAttribute("messages",mm.getMessages(chatroom.getRoomId()));
         return "chatroom";
     }
@@ -72,7 +76,8 @@ MessageManager mm = new MessageManager();
     @RequestMapping("/sendmessage")
     public String send(Model model, HttpSession session, Message message, Chatroom cr) {
     	Chatroom myRoom = (Chatroom) session.getAttribute("chatroom");
-    	crm.sendMessage(myRoom.getRoomId(),message.getContents());
+    	User user = (User) session.getAttribute("user");
+    	crm.sendMessage(myRoom.getRoomId(),message.getContents(), user.getUserName());
     	model.addAttribute("chatroom",myRoom);
     	model.addAttribute("messages",mm.getMessages(myRoom.getRoomId()));
     	return "chatroom";

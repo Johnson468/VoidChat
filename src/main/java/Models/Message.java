@@ -9,6 +9,12 @@ public class Message {
 		return sender;
 	}
 
+	public Message(String contents, String sender) {
+		super();
+		this.contents = contents;
+		this.sender = sender;
+	}
+
 	public void setSender(String sender) {
 		this.sender = sender;
 	}

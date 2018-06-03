@@ -20,6 +20,9 @@ public class User {
 		this.userId = userId;
 		this.userName = userName;
 	}
+	public User() {
+		
+	}
 	
 	public int getUserId() {
 		return userId;

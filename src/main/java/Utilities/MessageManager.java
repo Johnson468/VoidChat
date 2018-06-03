@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import Models.Message;
+
 public class MessageManager {
 	
 	ArrayList<String> roomMessages;
@@ -31,10 +33,10 @@ public class MessageManager {
 		this.roomId = roomId;
 	}
 	
-	public ArrayList<String> getMessages(int roomId) {
+	public ArrayList<Message> getMessages(int roomId) {
 		Statement stmt = null;
 		ResultSet rs = null;
-		ArrayList<String> messages = new ArrayList<String>();
+		ArrayList<Message> messages = new ArrayList<Message>();
 		Connection conn = ConnectionManager.makeConnection();
 		
 		try {
@@ -46,7 +48,7 @@ public class MessageManager {
 		    }
 		    // Go through the results and see if the session has the chatrooms or not
 		    while(rs.next()) {
-		    	messages.add(rs.getString("contents"));
+		    	messages.add(new Message(rs.getString("contents"), rs.getString("sender")));
 		    }
 		} catch (Exception e) {
 			e.printStackTrace();
