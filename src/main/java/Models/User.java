@@ -1,4 +1,10 @@
 package Models;
+/**
+ * Model class for keeping track of who sent what message
+ * @author Johnson468
+ *
+ */
+
 
 public class User {
 	int userId;
@@ -10,6 +16,11 @@ public class User {
 		this.userName = userName;
 		this.createdRooms = createdRooms;
 	}
+	public User(int userId, String userName) {
+		this.userId = userId;
+		this.userName = userName;
+	}
+	
 	public int getUserId() {
 		return userId;
 	}

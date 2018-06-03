@@ -3,7 +3,16 @@ package Models;
 public class Message {
 
 	String contents;
+	String sender;
 	
+	public String getSender() {
+		return sender;
+	}
+
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
+
 	public Message() {
 		super();
 	}
