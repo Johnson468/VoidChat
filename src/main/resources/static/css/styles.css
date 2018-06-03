@@ -1,44 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
 
-/* Styles */
-* {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: "Open Sans";
-  font-size: 14px;
-}
-
-.container {
-  width: 500px;
-  margin: 25px auto;
-}
-
-form {
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-}
-form label,
-form input {
-  border: 0;
-  margin-bottom: 3px;
-  display: block;
-  width: 50%;
-  align: center
-}
-form input {
-  height: 25px;
-  line-height: 25px;
-  background: #fff;
-  color: #000;
-  padding: 0 6px;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
 
 form .error {
   color: #ff0000;

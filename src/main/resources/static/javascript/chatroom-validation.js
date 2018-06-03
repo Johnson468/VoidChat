@@ -8,13 +8,14 @@ $(function() {
       // The key name on the left side is the name attribute
       // of an input field. Validation rules are defined
       // on the right side
-      chatmessage: {
-    	  required:true
+      contents: {
+    	  required:true,
+    	  minlength:2
       }
     },
     // Specify validation error messages
     messages: {
-      roomId: "Please enter a message"
+      contents: "Please enter a valid message"
     },
     // Make sure the form is submitted to the destination defined
     // in the "action" attribute of the form when valid
