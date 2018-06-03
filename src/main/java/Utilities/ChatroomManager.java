@@ -49,7 +49,7 @@ public class ChatroomManager {
 				    stmt = conn.createStatement();
 				    //Query all rooms in the database
 				    rs = stmt.executeQuery("SELECT * FROM chatroom WHERE room_id = " + String.valueOf(id) + ";");
-				    if (rs.next() == false) {
+				    if (rs== null) {
 				    	return null;
 				    }
 				    // Go through the results and see if the session has the chatrooms or not
@@ -61,9 +61,7 @@ public class ChatroomManager {
 				}
 				catch (SQLException ex){
 				    // handle any errors
-				    System.out.println("SQLException: " + ex.getMessage());
-				    System.out.println("SQLState: " + ex.getSQLState());
-				    System.out.println("VendorError: " + ex.getErrorCode());
+				    ex.printStackTrace();
 				}
 				finally {
 				    if (rs != null) {
@@ -220,15 +218,13 @@ public class ChatroomManager {
 		try {
 		    stmt = conn.createStatement();
 			stmt.executeUpdate("INSERT INTO chatroom VALUES(" + String.valueOf(cr.getRoomId()) + "," + 
-			String.valueOf(cr.getMaxMembers()) + ", 0);");
+			String.valueOf(cr.getMaxMembers()) + ", 1);");
 		  
 		    
 		}
 		catch (SQLException ex){
 		    // handle any errors
-		    System.out.println("SQLException: " + ex.getMessage());
-		    System.out.println("SQLState: " + ex.getSQLState());
-		    System.out.println("VendorError: " + ex.getErrorCode());
+			ex.printStackTrace();
 		}
 		finally {
 		    if (stmt != null) {
@@ -255,10 +251,7 @@ public class ChatroomManager {
 		    stmt.executeUpdate("DELETE FROM messages WHERE room_id = " + id + ";");
 		}
 		catch (SQLException ex){
-		    // handle any errors
-		    System.out.println("SQLException: " + ex.getMessage());
-		    System.out.println("SQLState: " + ex.getSQLState());
-		    System.out.println("VendorError: " + ex.getErrorCode());
+		    ex.printStackTrace();
 		}
 		finally {
 		  
@@ -286,9 +279,7 @@ public class ChatroomManager {
 		}
 		catch (SQLException ex){
 		    // handle any errors
-		    System.out.println("SQLException: " + ex.getMessage());
-		    System.out.println("SQLState: " + ex.getSQLState());
-		    System.out.println("VendorError: " + ex.getErrorCode());
+		    ex.printStackTrace();
 		}
 		finally {
 		  
@@ -316,6 +307,7 @@ public class ChatroomManager {
 		try {
 		    stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT curr_members FROM chatroom WHERE room_id = " + roomId + ";");
+			rs.next();
 			currMembers = rs.getInt("curr_members");
 			currMembers++;
 			stmt.executeUpdate("UPDATE chatroom SET curr_members = " + currMembers + " WHERE room_id = " + roomId);
@@ -323,9 +315,37 @@ public class ChatroomManager {
 		}
 		catch (SQLException ex){
 		    // handle any errors
-		    System.out.println("SQLException: " + ex.getMessage());
-		    System.out.println("SQLState: " + ex.getSQLState());
-		    System.out.println("VendorError: " + ex.getErrorCode());
+		    ex.printStackTrace();
+		}
+		finally {
+		    if (stmt != null) {
+		        try {
+		            stmt.close();
+		        } catch (SQLException sqlEx) { } // ignore
+
+		        stmt = null;
+		    }
+		}
+		
+	}
+	public void removeMember(int roomId) {
+		Statement stmt = null;
+		Connection conn;
+		ResultSet rs;
+		conn = ConnectionManager.makeConnection();
+		int currMembers = 0;
+		try {
+		    stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT curr_members FROM chatroom WHERE room_id = " + roomId + ";");
+			rs.next();
+			currMembers = rs.getInt("curr_members");
+			currMembers--;
+			stmt.executeUpdate("UPDATE chatroom SET curr_members = " + currMembers + " WHERE room_id = " + roomId);
+		    
+		}
+		catch (SQLException ex){
+		    // handle any errors
+		    ex.printStackTrace();
 		}
 		finally {
 		    if (stmt != null) {

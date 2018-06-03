@@ -60,8 +60,12 @@ MessageManager mm = new MessageManager();
     @RequestMapping("/leave")
     public String leave(Model model, HttpSession session, Chatroom cr) {
     	Chatroom myRoom = (Chatroom) session.getAttribute("chatroom");
+    	myRoom = crm.getRoomById(myRoom.getRoomId());
     	if (myRoom.getCurrentMembers() == 0) {
     		crm.deleteRoom(myRoom.getRoomId());
+    		crm.removeMember(myRoom.getRoomId());
+    	} else {
+    		crm.removeMember(myRoom.getRoomId());
     	}
     	return "home";
     }
