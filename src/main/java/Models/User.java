@@ -1,4 +1,7 @@
 package Models;
+
+import com.mysql.cj.util.StringUtils;
+
 /**
  * Model class for keeping track of who sent what message
  * @author Johnson468
