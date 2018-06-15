@@ -14,6 +14,7 @@ import Models.Message;
 import Models.User;
 import Utilities.ChatroomManager;
 import Utilities.MessageManager;
+import Utilities.Users;
 
 @Controller
 public class ChatroomController {
@@ -24,6 +25,7 @@ MessageManager mm = new MessageManager();
     public String Chat(@RequestParam(name="roomId", required=true, defaultValue="-1")int roomId, Model model, HttpSession session) {
     	//crm.updateRooms();
     	Chatroom chatroom = crm.getRoomById(roomId);
+    	String userName = Users.generateUsername();
     	//If chatroom doesn't exist
     	if(chatroom == null) {
     		model.addAttribute("sentback",true);
@@ -37,7 +39,7 @@ MessageManager mm = new MessageManager();
     	}
     	//If the chatroom exists and isn't full
     	crm.addMember(chatroom.getRoomId());
-    	User user = new User();
+    	User user = new User(userName);
         model.addAttribute("chatroom", chatroom);
         session.setAttribute("chatroom", chatroom);
         model.addAttribute("message",new Message());
@@ -54,8 +56,11 @@ MessageManager mm = new MessageManager();
     @RequestMapping("/createRoom")
     public String createRoom(@RequestParam(name="maxMembers", required=true, defaultValue="-1")int maxSize, Model model, HttpSession session) {
     	Chatroom newRoom = crm.createChatroom(maxSize);
+    	String username = Users.generateUsername();
+    	User user = new User(username);
     	model.addAttribute("chatroom",newRoom);
     	model.addAttribute("message", new Message());
+    	model.addAttribute("user",user);
     	session.removeAttribute("roomManager");
     	//session.setAttribute("roomManager", crm);
     	session.setAttribute("chatroom", newRoom);
