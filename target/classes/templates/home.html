@@ -7,13 +7,69 @@
 <script src="../javascript/home-validation.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".dropdown1").hover(            
+        function() {
+            $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideDown("400");
+            $(this).toggleClass('open');        
+        },
+        function() {
+            $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideUp("400");
+            $(this).toggleClass('open');       
+        }
+    );
+});
 
+</script>
 
 </head>
 <body>
+<div class="container">
+  <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">VoidChat - A VoidProducts Service</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        
+        
+        <li class="dropdown mega-dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home</a>
+        </li>
+         <li class="dropdown mega-dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Privacy and Security Solutions</a>
+         	
+        </li>
+         <li class="dropdown mega-dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About and Contact </a>
+        </li>
+        <li class="dropdown mega-dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Releases and News </a>
+        </li>
+
+      </ul>
+      
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</div>
 
 
-<div class="col-md-4">
+<!-- Start of the important stuff -->
+<div class="container">
 	
 	<div  class = "text-center">	
 		<div th:if ="${sentback} == true" class="alert alert-primary" role="alert">
@@ -26,18 +82,17 @@
   <div class="input-group">
   <form action="#" th:action="@{/byId}" th:object="${chatroom}" name ="chatroomform">
   <label for="*{roomId}">Join by room ID</label>
-      <input type="text" class="form-control" th:field="*{roomId}" placeholder="" name ="roomId">
-      
-      <span class="input-group-btn">
-        <button type="submit" value="Submit" class="center-block btn btn-large btn-primary">Search</button>
-      </span>
-      </form>
-    </div><!-- /input-group -->
-    <span class="input-group-btn">
-    <form action="#" th:action="@{/create}">
-  <button type="submit" value="Submit" class="center-block btn btn-large btn-primary">Create a new room</button>
-  </form>
   <span class="input-group-btn">
+      <input type="text" class="form-control" th:field="*{roomId}" placeholder="" name ="roomId">
+        <button type="submit" value="Submit" class="center-block btn btn-large btn-primary">Search</button>
+        </span>
+      </form>
+      <span class="input-group-btn" align = "left">
+    <form action="#" th:action="@{/create}">
+  <button type="submit" value="Submit" class="center-block btn btn-large btn-secondary">Create a new room</button>
+  </form>
+  </span>
+  </div>
 </div>
 
 </div>
