@@ -3,18 +3,26 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>VoidChat Chatroom</title>
-<script type = "text/javascript">
-function encrypt() {
-    var message = [[${chatroom.key}]];
-    console.log(message);
-}
-</script>
+<!-- Jquery base for validation and bootstrap -->
 <script src="https://cdn.jsdelivr.net/jquery/1.12.4/jquery.min.js"></script>
+<!-- Jquery validation plugin -->
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+<!-- Jquery validation rules for this page -->
 <script src="../javascript/chatroom-validation.js"></script>
+<!-- Bootstrap css and required javascript files -->
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- Style to make the warnings red -->
 <link rel="stylesheet" href="../css/styles.css"/>
+<!-- Encryption plugin -->
+<script type="text/javascript" src="https://cdn.rawgit.com/ricmoo/aes-js/e27b99df/index.js"></script>
+<script type = "text/javascript">
+    var key = '[[${chatroom.key}]]';
+    
+</script>
+<!-- Implementation of the encryption -->
+<script type="text/javascript" src= "../javascript/encryption.js"></script>
+
 </head>
 <div class="container">
     <div class="row">
@@ -32,9 +40,9 @@ function encrypt() {
               	</ul>
                 -->
                 <div class = "bubble" th:each="message:${messages}">
-                		<div class = "bubble"><p th:text="${message.contents}"></p>
-                		<p th:text="'-' + ${message.sender}"></p>
-                		</div>
+                		<p th:text="${message.contents}"></p>
+                		<p class="text-muted" th:text="'-' + ${message.sender}"></p>
+                		
                 </div>
                 
                 
@@ -59,10 +67,11 @@ function encrypt() {
             <div class="panel-footer">
                  <div class="input-group">
                  <form th:action="@{/sendmessage}" th:object="${message}" name="messageform" >
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{contents}" name="chatmessage"></textarea>
-                  <span class="input-group-btn">
-                    <button class="btn btn-primary" type="submit">Send</button>
-                  </span>
+                  <textarea class="form-control" id="messageInput" rows="3" th:field="*{contents}" name="chatmessage"></textarea>
+                  
+                  <!--<span class="input-group-btn">-->
+                    <button class="btn btn-primary" onclick='encrypt(' document.getElementById('messageInput').value + ','+ key +');'>Send</button>
+                 <!-- </span>-->
                   </form>
                 </div>
             </div>
