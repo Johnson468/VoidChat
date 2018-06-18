@@ -1,5 +1,6 @@
 package Controllers;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.boot.Banner.Mode;
@@ -13,6 +14,7 @@ import Models.Chatroom;
 import Models.Message;
 import Models.User;
 import Utilities.ChatroomManager;
+import Utilities.Crypto;
 import Utilities.MessageManager;
 import Utilities.Users;
 
@@ -71,18 +73,16 @@ MessageManager mm = new MessageManager();
     public String leave(Model model, HttpSession session, Chatroom cr) {
     	Chatroom myRoom = (Chatroom) session.getAttribute("chatroom");
     	myRoom = crm.getRoomById(myRoom.getRoomId());
-    	if (myRoom.getCurrentMembers() == 0) {
-    		crm.deleteRoom(myRoom.getRoomId());
-    		crm.removeMember(myRoom.getRoomId());
-    	} else {
-    		crm.removeMember(myRoom.getRoomId());
-    	}
+    	crm.removeMember(myRoom.getRoomId());
     	return "home";
     }
     @RequestMapping("/sendmessage")
     public String send(Model model, HttpSession session, Message message, Chatroom cr) {
     	Chatroom myRoom = (Chatroom) session.getAttribute("chatroom");
     	User user = (User) session.getAttribute("user");
+    	String messageContents = message.getContents();
+    	
+    	
     	crm.sendMessage(myRoom.getRoomId(),message.getContents(), user.getUserName());
     	model.addAttribute("user", user);
     	model.addAttribute("chatroom",myRoom);

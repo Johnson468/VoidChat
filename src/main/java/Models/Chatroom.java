@@ -1,11 +1,10 @@
 package Models;
 
-import java.util.ArrayList;
-
 public class Chatroom {
 	int maxMembers;
 	int currentMembers;
 	int roomId;
+	String key;
 	
 	public Chatroom(int maxMembers, int currentMembers, int roomId) {
 		super();
@@ -13,6 +12,15 @@ public class Chatroom {
 		this.currentMembers = currentMembers;
 		this.roomId = roomId;
 	}
+	
+	public Chatroom(int maxMembers, int roomId, String key) {
+		super();
+		this.maxMembers = maxMembers;
+		this.currentMembers = currentMembers;
+		this.roomId = roomId;
+		this.key = key;
+	}
+
 	public Chatroom(int maxMembers, int roomId) {
 		super();
 		this.maxMembers = maxMembers;
@@ -37,5 +45,11 @@ public class Chatroom {
 	}
 	public void setRoomId(int roomId) {
 		this.roomId = roomId;
+	}
+	public String getKey() {
+		return key;
+	}
+	public void setKey(String key) {
+		this.key = key;
 	}
 }

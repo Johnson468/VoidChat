@@ -12,6 +12,8 @@ package Utilities;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -42,7 +44,6 @@ public class ChatroomManager {
 				Statement stmt = null;
 				ResultSet rs = null;
 				Connection conn = ConnectionManager.makeConnection();
-				int roomId;
 				int maxMembers = 0;
 				int currentMembers = 0;
 				try {
@@ -54,7 +55,7 @@ public class ChatroomManager {
 				    }
 				    // Go through the results and see if the session has the chatrooms or not
 				    while(rs.next()) {
-				    	roomId = rs.getInt("room_id");
+				    	rs.getInt("room_id");
 				    	maxMembers = rs.getInt("max_members");
 				    	currentMembers = rs.getInt("curr_members");
 				    }
@@ -93,7 +94,8 @@ public class ChatroomManager {
 	public Chatroom createChatroom(int maxMembers) {
 		SecureRandom sr = new SecureRandom();
 		int roomId = Math.abs(sr.nextInt());
-		Chatroom newRoom = new Chatroom(maxMembers,roomId);
+		String key = generateKey();
+		Chatroom newRoom = new Chatroom(maxMembers,roomId,key);
 		rooms.add(newRoom);
 		storeRoom(newRoom);
 		return newRoom;
@@ -122,8 +124,7 @@ public class ChatroomManager {
 		    	if(getRoomById(roomId) != null && getRoomById(roomId) == new Chatroom(maxMembers,roomId)) {
 		    		System.out.println("Room is up to date");
 		    	} else {
-		    		int[] currentMembers = getMembers(roomId);
-		    		//rooms.add(new Chatroom(maxMembers, currentMembers.length, currentMembers, roomId ));
+		    		getMembers(roomId);
 		    	}
 		    	
 		    }
@@ -218,7 +219,7 @@ public class ChatroomManager {
 		try {
 		    stmt = conn.createStatement();
 			stmt.executeUpdate("INSERT INTO chatroom VALUES(" + String.valueOf(cr.getRoomId()) + "," + 
-			String.valueOf(cr.getMaxMembers()) + ", 1);");
+			String.valueOf(cr.getMaxMembers()) + ", 1 ,'" + cr.getKey() + "');");
 		  
 		    
 		}
@@ -340,8 +341,11 @@ public class ChatroomManager {
 			rs.next();
 			currMembers = rs.getInt("curr_members");
 			currMembers--;
-			stmt.executeUpdate("UPDATE chatroom SET curr_members = " + currMembers + " WHERE room_id = " + roomId);
-		    
+			if(currMembers == 0) {
+				deleteRoom(roomId);
+			} else {
+				stmt.executeUpdate("UPDATE chatroom SET curr_members = " + currMembers + " WHERE room_id = " + roomId);
+			}
 		}
 		catch (SQLException ex){
 		    // handle any errors
@@ -356,6 +360,26 @@ public class ChatroomManager {
 		        stmt = null;
 		    }
 		}
-		
 	}
+	private String generateKey() {
+		SecureRandom sr = new SecureRandom();
+		String randomNumber = String.valueOf(sr.nextInt());
+		String key = null;
+		try {
+			key = Crypto.hash(randomNumber);
+		} catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return key;
+	}
+	/**
+	 * Returns the encryption key of the given room ID
+	 * @param roomId
+	 * @return
+	 */
+	public String getRoomKey(int roomId) {
+		return "t";
+	}
+	
 }
