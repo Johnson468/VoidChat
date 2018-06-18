@@ -373,7 +373,7 @@ public class ChatroomManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return key.substring(0, 16);
+		return key.substring(0, 32);
 	}
 	/**
 	 * Returns the encryption key of the given room ID
