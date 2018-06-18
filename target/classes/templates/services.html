@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html>
 <head>
-<title>Void Chat Home</title>
+<meta charset="ISO-8859-1">
+<title>VoidPrivacy Products and Services</title>
 <link rel="stylesheet" href="../css/styles.css"/>
 <script src="https://cdn.jsdelivr.net/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
@@ -9,12 +11,11 @@
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="../javascript/utils.js"></script>
 </head>
+<body>
 <form type = "hidden" action="#" th:action="@{/}" id="gohome"></form>
 <form type = "hidden" action="#" th:action="@{/services}" id="services"></form>
 <form type = "hidden" action="#" th:action="@{/about}" id="about"></form>
 <form type = "hidden" action="#" th:action="@{/news}" id="news"></form>
-<body>
-<!-- Top menu -->
 <div class="container">
   <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -55,39 +56,10 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<!-- End of menu -->
 </div>
 
 
-<!-- Start of the important stuff -->
-<div class="container">
-	
-	
-		<div th:if ="${sentback} == true" class="alert alert-primary" role="alert">
-  			The ID you entered is either incorrect, or the chatroom no longer is active. 
-		</div>	
-		<div th:if ="${isFull} == true" class="alert alert-primary" role="alert">
-  			The chatroom you're trying is full.
-		</div>
-	
-  <div class="input-group">
-	  <form action="#" th:action="@{/byId}" th:object="${chatroom}" name ="chatroomform">
-		  <label for="*{roomId}">Join by room ID</label>
-		  <span class="input-group-btn">
-		      	<input type="text" class="form-control" th:field="*{roomId}" placeholder="" name ="roomId">
-		        <button type="submit" value="Submit" class="center-block btn btn-large btn-primary">Search</button>
-		   </span>
-	    </form>
-		<span class="input-group-btn" align = "left">
-			<form action="#" th:action="@{/create}">
-		    	<br/>
-		 	 <button type="submit" value="Submit" class="center-block btn btn-large btn-secondary">Create a new room</button>
-		  </form>
-	  </span>
-  </div>
 
-
-</div>
 </body>
 
 </html>

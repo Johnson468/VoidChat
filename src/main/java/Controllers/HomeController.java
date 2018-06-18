@@ -33,5 +33,16 @@ public class HomeController {
     	session.setAttribute("roomManager", crm);
         return "home";
     }
-    
+    @RequestMapping("/services")
+    public String services(Model model, HttpSession session) {
+    	return "services";
+    }
+    @RequestMapping("/about")
+    public String about(Model model, HttpSession session) {
+    	return "about";
+    }
+    @RequestMapping("/news")
+    public String news(Model model, HttpSession session) {
+    	return "news";
+    }
 }

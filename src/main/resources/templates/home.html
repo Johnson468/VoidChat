@@ -7,24 +7,14 @@
 <script src="../javascript/home-validation.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script type="text/javascript">
-$(document).ready(function(){
-    $(".dropdown1").hover(            
-        function() {
-            $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideDown("400");
-            $(this).toggleClass('open');        
-        },
-        function() {
-            $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideUp("400");
-            $(this).toggleClass('open');       
-        }
-    );
-});
-
-</script>
-
+<script src="../javascript/utils.js"></script>
 </head>
+<form type = "hidden" action="#" th:action="@{/}" id="gohome"></form>
+<form type = "hidden" action="#" th:action="@{/services}" id="services"></form>
+<form type = "hidden" action="#" th:action="@{/about}" id="about"></form>
+<form type = "hidden" action="#" th:action="@{/news}" id="news"></form>
 <body>
+<!-- Top menu -->
 <div class="container">
   <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -46,17 +36,17 @@ $(document).ready(function(){
         
         
         <li class="dropdown mega-dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home</a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="idbutton" onclick="goHome()">Home</a>
         </li>
          <li class="dropdown mega-dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Privacy and Security Solutions</a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="goServices()">Privacy and Security Solutions</a>
          	
         </li>
          <li class="dropdown mega-dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About and Contact </a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="goAbout()">About, Contact, and Donate </a>
         </li>
         <li class="dropdown mega-dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Releases and News </a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick = "goNews()">Releases and News </a>
         </li>
 
       </ul>
@@ -65,13 +55,14 @@ $(document).ready(function(){
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<!-- End of menu -->
 </div>
 
 
 <!-- Start of the important stuff -->
 <div class="container">
 	
-	<div  class = "text-center">	
+	
 		<div th:if ="${sentback} == true" class="alert alert-primary" role="alert">
   			The ID you entered is either incorrect, or the chatroom no longer is active. 
 		</div>	
@@ -80,20 +71,21 @@ $(document).ready(function(){
 		</div>
 	
   <div class="input-group">
-  <form action="#" th:action="@{/byId}" th:object="${chatroom}" name ="chatroomform">
-  <label for="*{roomId}">Join by room ID</label>
-  <span class="input-group-btn">
-      <input type="text" class="form-control" th:field="*{roomId}" placeholder="" name ="roomId">
-        <button type="submit" value="Submit" class="center-block btn btn-large btn-primary">Search</button>
-        </span>
-      </form>
-      <span class="input-group-btn" align = "left">
-    <form action="#" th:action="@{/create}">
-  <button type="submit" value="Submit" class="center-block btn btn-large btn-secondary">Create a new room</button>
-  </form>
-  </span>
+	  <form action="#" th:action="@{/byId}" th:object="${chatroom}" name ="chatroomform">
+		  <label for="*{roomId}">Join by room ID</label>
+		  <span class="input-group-btn">
+		      	<input type="text" class="form-control" th:field="*{roomId}" placeholder="" name ="roomId">
+		        <button type="submit" value="Submit" class="center-block btn btn-large btn-primary">Search</button>
+		   </span>
+	    </form>
+		<span class="input-group-btn" align = "left">
+			<form action="#" th:action="@{/create}">
+		    	<br/>
+		 	 <button type="submit" value="Submit" class="center-block btn btn-large btn-secondary">Create a new room</button>
+		  </form>
+	  </span>
   </div>
-</div>
+
 
 </div>
 </body>
