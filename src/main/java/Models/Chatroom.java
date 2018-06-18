@@ -13,6 +13,14 @@ public class Chatroom {
 		this.roomId = roomId;
 	}
 	
+	public Chatroom(int maxMembers, int currentMembers, int roomId, String key) {
+		super();
+		this.maxMembers = maxMembers;
+		this.currentMembers = currentMembers;
+		this.roomId = roomId;
+		this.key = key;
+	}
+
 	public Chatroom(int maxMembers, int roomId, String key) {
 		super();
 		this.maxMembers = maxMembers;

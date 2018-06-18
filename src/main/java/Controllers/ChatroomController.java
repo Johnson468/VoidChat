@@ -81,6 +81,7 @@ MessageManager mm = new MessageManager();
     	Chatroom myRoom = (Chatroom) session.getAttribute("chatroom");
     	User user = (User) session.getAttribute("user");
     	String messageContents = message.getContents();
+    	String key = crm.getRoomKey(myRoom.getRoomId());
     	
     	
     	crm.sendMessage(myRoom.getRoomId(),message.getContents(), user.getUserName());

@@ -46,6 +46,7 @@ public class ChatroomManager {
 				Connection conn = ConnectionManager.makeConnection();
 				int maxMembers = 0;
 				int currentMembers = 0;
+				String roomKey = "";
 				try {
 				    stmt = conn.createStatement();
 				    //Query all rooms in the database
@@ -58,6 +59,7 @@ public class ChatroomManager {
 				    	rs.getInt("room_id");
 				    	maxMembers = rs.getInt("max_members");
 				    	currentMembers = rs.getInt("curr_members");
+				    	roomKey = rs.getString("roomKey");
 				    }
 				}
 				catch (SQLException ex){
@@ -82,7 +84,7 @@ public class ChatroomManager {
 				    }
 				    
 				}
-				return new Chatroom(maxMembers, currentMembers, id );
+				return new Chatroom(maxMembers, currentMembers, id, roomKey );
 	}
 	
 	
