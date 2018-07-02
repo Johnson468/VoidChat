@@ -86,7 +86,31 @@
 		</div>
 	</div>
 </div>
-
+<div class="row" th:each="article:${articles}">
+	<div class="col-md-4">
+		<div class="card">
+			<div class="card-title p-l p-t">
+				<span class="label label-default"><p th:text="${article.addeddate}"></p></span>
+			</div>
+			<div class="card-block">
+				<p class="card-text" th:text="${article.message}"></p>
+				
+				<div class="card-text">
+					<a class="btn btn-sm btn-primary-outline pull-right"><i class="fa fa-comments-o"></i> 0</a>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="card-footer text-muted">
+				<div class="input-group input-group-sm">
+					<input type="text" class="form-control" placeholder="Comment this... :)">
+					<span class="input-group-btn">
+						<button class="btn btn-primary-outline" type="button"><i class="fa fa-edit"></i></button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 
 </body>

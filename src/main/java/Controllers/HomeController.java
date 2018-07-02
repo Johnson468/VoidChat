@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import Models.Chatroom;
 import Utilities.ChatroomManager;
+import Utilities.NewsManager;
 
 @Controller
 public class HomeController {
@@ -43,6 +44,7 @@ public class HomeController {
     }
     @RequestMapping("/news")
     public String news(Model model, HttpSession session) {
+    	model.addAttribute("articles", NewsManager.getArticles());
     	return "news";
     }
 }
