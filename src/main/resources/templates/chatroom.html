@@ -32,9 +32,15 @@
             <div class="container" id='chatbox'>
               
               	
-                <div class = "triangle-obtuse" th:each="message:${messages}">
+                <div th:each="message:${messages}">
+                	<div th:if="${message.sender} == ${user.userName}" class = "triangle-right right" align = "right">
+                		<p  th:text="${message.contents}"></p>
+                		<p class="text-muted" align="right" th:text="'-' + ${message.sender}"></p>
+                	</div>
+                	<div th:if="${message.sender} != ${user.userName}" class = "triangle-right left">
                 		<p th:text="${message.contents}"></p>
-                		<p class="text-muted" th:text="'-' + ${message.sender}"></p>
+                		<p class="text-muted" align="left" th:text="'-' + ${message.sender}"></p>
+                	</div>	
                 </div>
                 
                 
